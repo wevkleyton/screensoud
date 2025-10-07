@@ -4,6 +4,7 @@ import br.com.estudos.screensoud.model.Artista;
 import br.com.estudos.screensoud.model.Musica;
 import br.com.estudos.screensoud.model.TipoArtista;
 import br.com.estudos.screensoud.repository.ArtistaRepository;
+import br.com.estudos.screensoud.service.ConsultaChatGPT;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,9 +68,16 @@ public class Principal {
     }
 
     private void pesquisarDadosDoArtista() {
+        System.out.println("Pesquisar dados sobre qual artista? ");
+        var nome = leitura.nextLine();
+        var resposta = ConsultaChatGPT.obterInformacao(nome);
+        System.out.println(resposta.trim());
     }
 
     private void buscarMusicaPorArtista() {
+        System.out.println("Buscar musicas de que artista? ");
+        var nome = leitura.nextLine();
+        List<Musica> musicas = repositorio.buscaMusicasPorArtista(nome);
     }
 
     private void listarMusicas() {
